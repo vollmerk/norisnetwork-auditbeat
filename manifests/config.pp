@@ -32,7 +32,7 @@ class auditbeat::config {
   }
 
   if Integer($auditbeat::major_version) < 8 {
-    if defined($facts['auditbeat_version']) {
+    if 'auditbeat_version' in $facts {
     	$auditbeat_version = $facts['auditbeat_version']
     }
     else {
