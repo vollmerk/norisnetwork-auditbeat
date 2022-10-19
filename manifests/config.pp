@@ -32,11 +32,17 @@ class auditbeat::config {
   }
 
   if Integer($auditbeat::major_version) < 8 {
+    if defined($facts['auditbeat_version']) {
+    	$auditbeat_version = $facts['auditbeat_version']
+    }
+    else {
+    	$auditbeat_version = '1.0.0'
+    }
     # Add the 'xpack' section if supported (version >= 6.2.0)
-    if (versioncmp($facts['auditbeat_version'], '7.2.0') >= 0) and ($auditbeat::monitoring) {
+    if (versioncmp($auditbeat_version, '7.2.0') >= 0) and ($auditbeat::monitoring) {
       $merged_config = deep_merge($auditbeat_config_temp, {'monitoring' => $auditbeat::monitoring})
     }
-    elsif (versioncmp($facts['auditbeat_version'], '6.2.0') >= 0) and ($auditbeat::xpack) {
+    elsif (versioncmp($auditbeat_version, '6.2.0') >= 0) and ($auditbeat::xpack) {
       $merged_config = deep_merge($auditbeat_config_temp, {'xpack' => $auditbeat::xpack})
     }
     else {
