@@ -44,7 +44,7 @@ class auditbeat::repo inherits auditbeat {
             ensure   => $auditbeat::ensure,
             descr    => "Elastic repository for ${auditbeat::major_version}.x packages",
             baseurl  => $yum_repo_url,
-            gpgcheck => 1,
+            gpgcheck => $auditbeat::gpgcheck,
             gpgkey   => $gpg_key_url,
             enabled  => 1,
           }

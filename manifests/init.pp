@@ -80,6 +80,7 @@ class auditbeat (
   Enum['present', 'absent'] $ensure                                                   = 'present',
   Optional[Enum['systemd', 'init', 'debian', 'redhat', 'upstart']] $service_provider  = undef,
   Boolean $manage_repo                                                                = true,
+  Optional[Integer] $gpgcheck							      = 1,
   Optional[Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]] $apt_repo_url                  = undef,
   Optional[Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]] $yum_repo_url                  = undef,
   Optional[Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]] $gpg_key_url                   = undef,
